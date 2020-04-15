@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Mission to Mars</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="text">
+    <style>
+        body {
+          background-image: url('mars.jpg');
+          background-repeat: no-repeat;
+          background-attachment: fixed;
+          background-size: cover;
+        }
+        </style>
+    <section class="container jumbotron text-center" style="background-color:black;">
+        <div class="row">
+            <div class="col-md-4">
+                <img src="ares_action.jpg">
+            </div>
+            <div class="col-md-4">
+                <h1 style="font-size: 50px;">Mission to Mars</h1>
+                <br>
+                <div class="button">{{mars_data}}</div>
+            </div>
+            <div class="col-md-4">
+                <img src="ares_pose.jpg">
+            </div>
+        </div>
+
+    </section>
+    <div align="left">
+        <!--Mars Title & Paragraph-->
+        <h1>Latest Mars News</h1>
+        <h2>{{mars_data.title}}</h2>
+        <p>{{mars_data.paragraph}}</p>
+    </div>
+    <section>
+        <!--Mars Featured Image, Mars Tweet, & Mars Facts-->
+        <h1 align="left">Featured Mars Image</h1>
+        <div align="right">{{mars_data.mars_tweet}}</div>
+        <br>
+        <img align="left" {{mars_data.featured_image}}>
+        <h2 align="right">Mars Facts</h2>
+        <div align="right">{{mars_data.mars_facts}}</div>
+    </section>
+    <section class="container">
+        <!-- Mars Hemispheres -->
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="heading" align="center">Mars Hemispheres</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 h_line">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <img {{mars_data.mars_images.img_url1}}>
+                <p align="left">{{mars_data.mars_images.title1}}</p>
+            </div>
+            <div class="col-md-6">
+                <img {{mars_data.mars_images.img_url2}}>
+                <p align="left">{{mars_data.mars_images.title2}}</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <img {{mars_data.mars_images.img_url3}}>
+                <p align="left">{{mars_data.mars_images.title3}}</p>
+            </div>
+            <div class="col-md-6">
+                <img {{mars_data.mars_images.img_url4}}>
+                <p align="left">{{mars_data.mars_images.title4}}</p>
+            </div>
+        </div>
+    </section>
+
+  
+</body>
+
+</html>

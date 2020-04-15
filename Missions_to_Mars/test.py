@@ -33,6 +33,9 @@ client = pymongo.MongoClient(conn)
 # Connect to a database. Will create one if not already available.
 db = client.mars_db
 
+#Drop database if it exists
+db.mars_collection.drop()
+
 #Create the scrape route
 @app.route('/scrape')
 def mongo_insert():
