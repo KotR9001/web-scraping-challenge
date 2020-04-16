@@ -121,6 +121,10 @@ driver.get(url2)
 
 # In[20]:
 
+#Found Method to Delay Time at https://www.journaldev.com/15797/python-time-sleep
+import time
+t = 60 # seconds
+time.sleep(t)
 
 #Utilize Page Source
 html2 = driver.page_source
@@ -250,6 +254,7 @@ mars_list
 #Create the Dictionary
 mars_dictionary = {'title':title, 'paragraph':paragraph, 'featured_image':featured_image_url, 
                 'mars_tweet':mars_weather, 'mars_facts':mars_table, 'mars_images':mars_list}
+print(mars_dictionary)
 
 
 # In[ ]:

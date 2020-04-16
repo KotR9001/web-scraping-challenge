@@ -27,7 +27,8 @@
             <div class="col-md-4">
                 <h1 style="font-size: 50px;">Mission to Mars</h1>
                 <br>
-                <div class="button">{{mars_data}}</div>
+                <!--Nelson helped me with this button.-->
+                <button type="button" onclick="window.location.href='/scrape';">Scrape</button>
             </div>
             <div class="col-md-4">
                 <img src="ares_pose.jpg">
@@ -38,17 +39,18 @@
     <div align="left">
         <!--Mars Title & Paragraph-->
         <h1>Latest Mars News</h1>
-        <h2>{{mars_data.title}}</h2>
-        <p>{{mars_data.paragraph}}</p>
+        <h2>{{mars_listings1.title}}</h2>
+        <p>{{mars_listings1.paragraph}}</p>
     </div>
     <section>
         <!--Mars Featured Image, Mars Tweet, & Mars Facts-->
         <h1 align="left">Featured Mars Image</h1>
-        <div align="right">{{mars_data.mars_tweet}}</div>
+        <div align="right">{{mars_listings1.mars_tweet}}</div>
         <br>
-        <img align="left" {{mars_data.featured_image}}>
+        <img align="left" {{mars_listings1.featured_image}}>
         <h2 align="right">Mars Facts</h2>
-        <div align="right">{{mars_data.mars_facts}}</div>
+        <!--Nelson helped me with the safe function-->
+        <div align="right">{{mars_listings1.mars_facts | safe}}</div>
     </section>
     <section class="container">
         <!-- Mars Hemispheres -->
@@ -63,22 +65,22 @@
         </div>
         <div class="row">
             <div class="col-md-6">
-                <img {{mars_data.mars_images.img_url1}}>
-                <p align="left">{{mars_data.mars_images.title1}}</p>
+                <img src="{{mars_listings1.mars_images.img_url1}}">
+                <p align="left">{{mars_listings1.mars_images.title1}}</p>
             </div>
             <div class="col-md-6">
-                <img {{mars_data.mars_images.img_url2}}>
-                <p align="left">{{mars_data.mars_images.title2}}</p>
+                <img src="{{mars_listings1.mars_images.img_url2}}">
+                <p align="left">{{mars_listings1.mars_images.title2}}</p>
             </div>
         </div>
         <div class="row">
             <div class="col-md-6">
-                <img {{mars_data.mars_images.img_url3}}>
-                <p align="left">{{mars_data.mars_images.title3}}</p>
+                <img src="{{mars_listings1.mars_images.img_url3}}">
+                <p align="left">{{mars_listings1.mars_images.title3}}</p>
             </div>
             <div class="col-md-6">
-                <img {{mars_data.mars_images.img_url4}}>
-                <p align="left">{{mars_data.mars_images.title4}}</p>
+                <img src="{{mars_listings1.mars_images.img_url4}}">
+                <p align="left">{{mars_listings1.mars_images.title4}}</p>
             </div>
         </div>
     </section>
