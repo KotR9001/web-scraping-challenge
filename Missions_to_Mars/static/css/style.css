@@ -1,0 +1,12 @@
+.text {
+    color: white
+}
+
+.box {
+    position: fixed;
+    border-radius: 1px;
+    background-color: white;
+    right: 50px;
+    height: 200px;
+    width: 200px;
+}

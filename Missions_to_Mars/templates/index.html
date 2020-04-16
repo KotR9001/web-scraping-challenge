@@ -7,48 +7,48 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Mission to Mars</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <link rel="stylesheet" href="style.css">
+  <!--Code for Using CSS with Flask Found at https://stackoverflow.com/questions/39579666/how-to-set-background-image-on-flask-templates-->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <link rel="stylesheet" href="/static/css/style.css">
 </head>
 
-<body class="text">
-    <style>
-        body {
-          background-image: url('mars.jpg');
-          background-repeat: no-repeat;
-          background-attachment: fixed;
-          background-size: cover;
-        }
-        </style>
+<body class="text" style="background-image: url('/static/img/mars.jpg'); background-repeat: no-repeat; background-attachment: fixed; background-size: cover;">
     <section class="container jumbotron text-center" style="background-color:black;">
         <div class="row">
             <div class="col-md-4">
-                <img src="ares_action.jpg">
+                <img src="/static/img/ares_action.jpg">
             </div>
             <div class="col-md-4">
                 <h1 style="font-size: 50px;">Mission to Mars</h1>
                 <br>
                 <!--Nelson helped me with this button.-->
-                <button type="button" onclick="window.location.href='/scrape';">Scrape</button>
+                <button type="button" onclick="window.location.href='/scrape';" style="color: black;">Scrape</button>
             </div>
             <div class="col-md-4">
-                <img src="ares_pose.jpg">
+                <img src="/static/img/ares_pose.jpg">
             </div>
         </div>
 
     </section>
-    <div align="left">
+    <div align="center">
         <!--Mars Title & Paragraph-->
         <h1>Latest Mars News</h1>
-        <h2>{{mars_listings1.title}}</h2>
+        <h3>{{mars_listings1.title}}</h3>
         <p>{{mars_listings1.paragraph}}</p>
     </div>
+    <br>
+    <br>
     <section>
         <!--Mars Featured Image, Mars Tweet, & Mars Facts-->
         <h1 align="left">Featured Mars Image</h1>
-        <div align="right">{{mars_listings1.mars_tweet}}</div>
+        <h3 align="right">Current Weather on Mars</h3>
+        <div align="right" style="position: absolute; border-radius: 5px; border-color: gray; right: 20px; height: 400px; width: 400px;">{{mars_listings1.mars_tweet}}</div>
         <br>
-        <img align="left" {{mars_listings1.featured_image}}>
-        <h2 align="right">Mars Facts</h2>
+        <img align="left" src="{{mars_listings1.featured_image}}">
+        <br>
+        <br>
+        <br>
+        <h3 align="right">Mars Facts</h3>
         <!--Nelson helped me with the safe function-->
         <div align="right">{{mars_listings1.mars_facts | safe}}</div>
     </section>
