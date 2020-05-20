@@ -18,21 +18,43 @@ def scrape():
     ###Scrape the Latest News Title and Paragraph from the NASA Mars News Site
     url = "https://mars.nasa.gov/news/?page=0&per_page=40&order=publish_date+desc%2Ccreated_at+desc&search=&category=19%2C165%2C184%2C204&blank_scope=Latest"
 
-    #Create the Response
-    response = requests.get(url)
+    #Import Selenium to Handle Dynamically Loaded Page
+    #Found Method at https://stackoverflow.com/questions/56746181/why-python-output-doesnt-match-html-for-target-website
+    #Found Method to Construct Driver at https://stackoverflow.com/questions/45499517/beautifulsoup-parser-cant-access-html-elements
+    #Found Method to Enable BeautifulSoup to Interact with Driver at https://github.com/SeleniumHQ/selenium/issues/5998
+    from selenium import webdriver
+
+    #Create the Driver
+    #Found Method to Get Driver to Work at https://github.com/SeleniumHQ/selenium/issues/5998
+    options = webdriver.ChromeOptions() 
+    options.add_argument('--headless')
+    driver = webdriver.Chrome('C:/Users/bjros/OneDrive/Desktop/KU_Data_Analytics_Boot_Camp/Homework Assignments/Homework Week 12/web-scraping-challenge/Missions_to_Mars/chromedriver.exe')
+
+    #Get the URL
+    driver.get(url)
+
+    #Found Method to Delay Time at https://www.journaldev.com/15797/python-time-sleep
+    import time
+    t = 10 # seconds
+    time.sleep(t)
+
+    #Utilize Page Source
+    html = driver.page_source
 
     #Create the BeautifulSoup Object
-    soup = bs(response.text, 'html.parser')
-    print(soup.prettify)
+    soup = bs(html, 'html.parser')
+    print(soup.prettify())
 
+    #Close the NASA Mars Page
+    driver.close()
 
     # In[3]:
 
 
     #Return Code for All News Titles & Paragraphs
-    titles = soup.find_all('div', class_='content_title')
+    titles = soup.find_all('div', class_='bottom_gradient')
     #Method to Return All Matching Elements Found at https://stackoverflow.com/questions/30147223/beautiful-soup-findall-multiple-class-using-one-query
-    paragraphs = soup.select('.grid_layout')[1].find_all('div', class_='rollover_description_inner')
+    paragraphs = soup.select('.grid_layout')[1].find_all('div', class_='article_teaser_body')
 
     #Error Handling
     try:
@@ -58,7 +80,7 @@ def scrape():
     url1 = 'https://www.jpl.nasa.gov/spaceimages/?search=&category=Mars'
 
     #Create the Path
-    executable_path = {'executable_path': 'chromedriver.exe'}
+    executable_path = {'executable_path': '../chromedriver.exe'}
     browser1 = Browser('chrome', **executable_path, headless=False)
 
     #Visit the Website

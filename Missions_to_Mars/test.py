@@ -46,7 +46,7 @@ def mongo_insert():
 @app.route('/')
 def index():
     mars_data = db.mars_collection.find()
-    return render_template('index.html', mars_data=mars_data)
+    return render_template('../templates/index.html', mars_data=mars_data)
 
 if __name__ == "__main__":
     app.run(debug=True)

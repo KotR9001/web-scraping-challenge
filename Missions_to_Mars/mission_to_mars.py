@@ -22,18 +22,44 @@ url = "https://mars.nasa.gov/news/?page=0&per_page=40&order=publish_date+desc%2C
 #Create the Response
 response = requests.get(url)
 
+#Import Selenium to Handle Dynamically Loaded Page
+#Found Method at https://stackoverflow.com/questions/56746181/why-python-output-doesnt-match-html-for-target-website
+#Found Method to Construct Driver at https://stackoverflow.com/questions/45499517/beautifulsoup-parser-cant-access-html-elements
+#Found Method to Enable BeautifulSoup to Interact with Driver at https://github.com/SeleniumHQ/selenium/issues/5998
+from selenium import webdriver
+
+#Create the Driver
+#Found Method to Get Driver to Work at https://github.com/SeleniumHQ/selenium/issues/5998
+options = webdriver.ChromeOptions() 
+options.add_argument('--headless')
+driver = webdriver.Chrome('C:/Users/bjros/OneDrive/Desktop/KU_Data_Analytics_Boot_Camp/Homework Assignments/Homework Week 12/web-scraping-challenge/Missions_to_Mars/chromedriver.exe')
+
+#Get the URL
+driver.get(url)
+
+#Found Method to Delay Time at https://www.journaldev.com/15797/python-time-sleep
+import time
+t = 10 # seconds
+time.sleep(t)
+
+#Utilize Page Source
+html = driver.page_source
+
 #Create the BeautifulSoup Object
-soup = bs(response.text, 'html.parser')
-print(soup.prettify)
+soup = bs(html, 'html.parser')
+print(soup.prettify())
+
+#Close the NASA Mars Page
+driver.close()
 
 
 # In[3]:
 
 
 #Return Code for All News Titles & Paragraphs
-titles = soup.find_all('div', class_='content_title')
+titles = soup.find_all('div', class_='bottom_gradient')
 #Method to Return All Matching Elements Found at https://stackoverflow.com/questions/30147223/beautiful-soup-findall-multiple-class-using-one-query
-paragraphs = soup.select('.grid_layout')[1].find_all('div', class_='rollover_description_inner')
+paragraphs = soup.select('.grid_layout')[1].find_all('div', class_='article_teaser_body')
 
 #Error Handling
 try:
@@ -59,8 +85,8 @@ except:
 url1 = 'https://www.jpl.nasa.gov/spaceimages/?search=&category=Mars'
 
 #Create the Path
-executable_path = {'executable_path': 'chromedriver.exe'}
-browser1 = Browser('chrome', **executable_path, headless=False)
+executable_path1 = {'executable_path': '../chromedriver.exe'}
+browser1 = Browser('chrome', **executable_path1, headless=False)
 
 #Visit the Website
 browser1.visit(url1)
@@ -95,7 +121,7 @@ except:
     print("The window is closed.")
 
 
-# In[19]:
+# In[7]:
 
 
 ###Scrape the Latest Mars Weather Tweet from the Twitter Webpage
@@ -105,6 +131,7 @@ except:
 #Found Method to Construct Driver at https://stackoverflow.com/questions/45499517/beautifulsoup-parser-cant-access-html-elements
 #Found Method to Enable BeautifulSoup to Interact with Driver at https://github.com/SeleniumHQ/selenium/issues/5998
 from selenium import webdriver
+
 
 #Create the URL
 url2 = 'https://twitter.com/marswxreport?lang=en'
@@ -119,7 +146,8 @@ driver = webdriver.Chrome('C:/Users/bjros/OneDrive/Desktop/KU_Data_Analytics_Boo
 driver.get(url2)
 
 
-# In[20]:
+# In[8]:
+
 
 #Found Method to Delay Time at https://www.journaldev.com/15797/python-time-sleep
 import time
@@ -134,7 +162,7 @@ soup2 = bs(html2, 'html.parser')
 print(soup2.prettify())
 
 
-# In[21]:
+# In[9]:
 
 
 #Import Module to Allow Compilement
@@ -150,7 +178,7 @@ except:
     print('Error: The latest Mars weather tweet could not be found.')
 
 
-# In[22]:
+# In[10]:
 
 
 #Close the Mars Tweet Twitter Webpage
@@ -248,13 +276,13 @@ mars_list = [{'title1':cerberus_title, 'img_url1':cerberus_image}, {'title2':sch
 mars_list
 
 
-# In[23]:
+# In[14]:
 
 
 #Create the Dictionary
 mars_dictionary = {'title':title, 'paragraph':paragraph, 'featured_image':featured_image_url, 
                 'mars_tweet':mars_weather, 'mars_facts':mars_table, 'mars_images':mars_list}
-print(mars_dictionary)
+mars_dictionary
 
 
 # In[ ]:
