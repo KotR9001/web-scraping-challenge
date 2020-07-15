@@ -3,18 +3,19 @@
 
 #Convert Jupyter Notebook into Python Script
 
-#Import Dependencies
-#Method Found at https://medium.com/@researchplex/the-easiest-way-to-convert-jupyter-ipynb-to-python-py-912e39f16917
-# and https://ipython.org/ipython-doc/rel-0.10.2/html/interactive/extension_api.html
-from bs4 import BeautifulSoup as bs
-from splinter import Browser
-from flask import Flask, render_template
-import pandas as pd
-import requests
-import pymongo
-
 #Create the Function for Converting the File
 def scrape():
+
+    #Import Dependencies
+    #Method Found at https://medium.com/@researchplex/the-easiest-way-to-convert-jupyter-ipynb-to-python-py-912e39f16917
+    # and https://ipython.org/ipython-doc/rel-0.10.2/html/interactive/extension_api.html
+    from bs4 import BeautifulSoup as bs
+    from splinter import Browser
+    from flask import Flask, render_template
+    import pandas as pd
+    import requests
+    import pymongo
+
     ###Scrape the Latest News Title and Paragraph from the NASA Mars News Site
     url = "https://mars.nasa.gov/news/?page=0&per_page=40&order=publish_date+desc%2Ccreated_at+desc&search=&category=19%2C165%2C184%2C204&blank_scope=Latest"
 
